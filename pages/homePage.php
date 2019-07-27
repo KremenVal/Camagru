@@ -1,6 +1,5 @@
 <?php
 	session_start();
-	phpinfo();
 ?>
 <!DOCTYPE html>
 <HTML>

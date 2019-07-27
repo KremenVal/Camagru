@@ -6,33 +6,42 @@
 	require_once '../config/database.php';
 	require_once 'sendEmailVerification.php';
 
-	if (!isset($_POST['loggin']) || !isset($_POST['email']) || !isset($_POST['password']) || !isset($_POST['confirmPassword']))
+	$_SESSION['loginValue'] = $_POST['login'];
+	$_SESSION['emailVAlue'] = $_POST['email'];
+	$_SESSION['passwordValue'] = $_POST['password'];
+
+	if (!isset($_POST['login']) || !isset($_POST['email']) || !isset($_POST['password']) || !isset($_POST['confirmPassword']))
 	{
 		$_SESSION['empty'] = 'You need to enter all field.';
 		header('Location: ../pages/createAccount.php');
+		return ;
 	}
 
-	if (strlen($_POST['loggin']) < 3 || strlen($_POST['loggin']) > 30)
+	if (strlen($_POST['login']) < 3 || strlen($_POST['login']) > 30)
 	{
-		$_SESSION['loggingLen'] = $_POST['loggin'];
+		$_SESSION['loginLen'] = true;
 		header('Location: ../pages/createAccount.php');
+		return ;
 	}
-	else if (preg_match('/[^A-Za-z0-9.-]/', $_POST['loggin']))
+	else if (preg_match('/[^A-Za-z0-9]/', $_POST['login']))
 	{
-		$_SESSION['loggingSym'] = $_POST['loggin'];
+		$_SESSION['loginSym'] = $_POST['login'];
 		header('Location: ../pages/createAccount.php');
+		return ;
 	}
 
 	if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))
 	{
 		$_SESSION['email'] = $_POST['email'];
 		header('Location: ../pages/createAccount.php');
+		return ;
 	}
 
 	if ($_POST['password'] != $_POST['confirmPassword'])
 	{
 		$_SESSION['password'] = 'Your passwords don\'t match.';
 		header('Location: ../pages/createAccount.php');
+		return ;
 	}
 
 	$location = $_SERVER['HTTP_HOST'] . str_replace("/action/actionCreate.php", "", $_SERVER['REQUEST_URI']);
@@ -48,6 +57,10 @@
 		':token' => $token
 	]);
 
-	var_dump(sendEmailVerification($_POST['email'], $_POST['loggin'], $token, $location));
-	// header('Location: ../pages/createAccount.php');
+	$_SESSION['loginValue'] = NULL;
+	$_SESSION['emailVAlue'] = NULL;
+	$_SESSION['passwordValue'] = NULL;
+
+	sendEmailVerification($_POST['email'], $_POST['login'], $token, $location);
+	header('Location: ../pages/createAccount.php');
 ?>
