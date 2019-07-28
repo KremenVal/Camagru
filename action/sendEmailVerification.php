@@ -14,7 +14,7 @@
 			<body>
 				Hello ' . htmlspecialchars($logging) . ' </br>
 				To finalyze your subscribtion please click the link below </br>
-				<a href="http://' . $location . '/pages/homePage.php?token=' . $token . '">Verify my email</a>
+				<a href="http://' . $location . '/pages/SuccessVerify.php?token=' . $token . '">Verify my email</a>
 			</body>
 			</html>
 		';

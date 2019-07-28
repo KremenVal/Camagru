@@ -35,19 +35,10 @@
 		header('Location: ../pages/createAccount.php');
 	}
 
-	$location = $_SERVER['HTTP_HOST'] . str_replace("/action/actionCreate.php", "", $_SERVER['REQUEST_URI']);
-	$token = uniqid(rand(), true);
-	$pdo = new PDO($DB_DSN_CREATED, $DB_USER, $DB_PASSWORD);
-	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$sqlInsertInto = 'INSERT INTO users (login, email, password, token)
-			value (:login, :email, :password, :token)';
-	$result = $pdo->prepare($sqlInsertInto);
-	$result->execute([':login' => $_POST['loggin'],
-		':email' => $_POST['email'],
-		':password' => hash('whirlpool', $_POST['password']),
-		':token' => $token
-	]);
+	require_once '../function/AddUser.php';
 
-	var_dump(sendEmailVerification($_POST['email'], $_POST['loggin'], $token, $location));
-	// header('Location: ../pages/createAccount.php');
+	sendEmailVerification($_POST['email'], $_POST['loggin'], $token, $location);
+	$_SESSION['success'] = 'Account has been successfully created';
+	$_SESSION['user'] = $_POST['loggin'];
+    header('Location: ../pages/createAccount.php');
 ?>

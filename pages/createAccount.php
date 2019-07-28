@@ -10,6 +10,13 @@
 </header>
 <body>
 	<div class="createAccount">
+        <?php
+            if ($_SESSION['success'])
+            {
+                echo $_SESSION['success'];
+                $_SESSION['success'] = null;
+            }
+        ?>
 		<form method="post" action="../action/actionCreate.php">
 			<?php
 				if ($_SESSION['empty'])
