@@ -12,8 +12,8 @@
 				<title>' . $subject . '</title>
 			</head>
 			<body>
-				Hello ' . htmlspecialchars($logging) . ' </br>
-				To finalyze your subscribtion please click the link below </br>
+				Hello ' . htmlspecialchars($logging) . '!!!<br>
+				To finalyze your subscribtion please click the link below <br>
 				<a href="http://' . $location . '/pages/SuccessVerify.php?token=' . $token . '">Verify my email</a>
 			</body>
 			</html>

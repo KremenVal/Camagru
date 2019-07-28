@@ -2,9 +2,6 @@
 	session_start();
 	require '../action/errorMessage.php';
 	require '../action/inputValue.php';
-	$_SESSION['loginValue'] = NULL;
-	$_SESSION['emailVAlue'] = NULL;
-	$_SESSION['passwordValue'] = NULL;
 ?>
 <!DOCTYPE html>
 <HTML>
@@ -22,7 +19,7 @@
 				<?php errorLogin(); ?>
 			</div>
 			<div class="row">
-				<input type="text" name="email" id="email" required>
+				<input type="text" name="email" id="email" required value=<?php inputValue($_SESSION['emailValue']); ?>>
 				<?php errorEmail(); ?>
 			</div>
 			<div class="row">

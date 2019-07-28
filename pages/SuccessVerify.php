@@ -1,17 +1,25 @@
 <?php
     session_start();
+    ini_set('error_reporting', E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
     require_once '../config/database.php';
+    require_once '../action/sendAccountInfo.php';
 
-    if ($_GET['token'] && $_SESSION['user'])
+    if ($_GET['token'])
     {
-
-        echo "<span>Hello MotherFucker!!</span><br>";
         $pdo = new PDO($DB_DSN_CREATED, $DB_USER, $DB_PASSWORD);
-        $query= $pdo->prepare("SELECT id FROM users WHERE login=:login");
-        $query->execute(array(':login' => $_SESSION['user']));
-        $val = $query->fetch();
-        $query->closeCursor();
-        $query= $pdo->prepare("UPDATE users SET verification='Y' WHERE id=:id");
-        $query->execute(array('id' => $val['id']));
-        $query->closeCursor();
+        $result= $pdo->prepare('SELECT * FROM users  WHERE token=:token');
+        $result->execute(array('token' => $_GET['token']));
+        $valueToken = $result->fetch();
+        $result->closeCursor();
+        if ($valueToken)
+        {
+            $result= $pdo->prepare("UPDATE users SET verification='Y' WHERE id=:id");
+            $result->execute(array('id' => $valueToken['id']));
+            $result->closeCursor();
+            sendAccountInfo($valueToken['login'], $_SESSION['passwordUser'], $valueToken['email']);
+            $_SESSION['passwordUser'] = null;
+        }
+        echo "<span>Hello MotherFucker!!</span><br>";
     }
