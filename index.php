@@ -1,16 +1,24 @@
 <?php
-	ini_set('error_reporting', E_ALL);
-	ini_set('display_errors', 1);
-	ini_set('display_startup_errors', 1);
 	session_start();
+	require 'application/lib/Dev.php';
+
+	spl_autoload_register(function ($class) {
+		$path = str_replace('\\', '/', $class . '.php');
+
+		if (file_exists($path))
+		{
+			require $path;
+		}
+	});
 
 	if (!isset($_SESSION['logged']))
 	{
-		require_once 'config/setup.php';
-		header('Location: pages/homePage.php');
+		require 'application/config/setup.php';
 	}
 	else
 	{
 		echo "string";
 	}
-?>
+
+	$router = new application\core\Router();
+	$router->run();

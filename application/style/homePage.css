@@ -1,0 +1,180 @@
+* {
+	box-sizing: border-box;
+	color: crimson;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	background-image: url("/application/images/flag.jpg");
+	background-size: cover;
+}
+
+.mainForm {
+	width: 40%;
+	margin: 10% auto auto auto;
+}
+
+.inputTextMain, .inputPassMain {
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+}
+
+.inputTextReg, .inputPassReg {
+	width: 40%;
+	padding: 15px;
+	margin: 5px 0 22px 0;
+	display: inline-block;
+	border: none;
+	background: #f1f1f1;
+}
+
+.inputTextReg:focus, .inputPassReg:focus {
+	background-color: #ddd;
+	outline: none;
+}
+
+button {
+	background-color: #4CAF50;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+	opacity: 0.9;
+}
+
+button:hover {
+	opacity: 1;
+}
+
+.signUpBtn {
+	width: auto;
+	padding: 10px 18px;
+	background-color: dodgerblue;
+}
+
+.forgotBtn {
+	width: auto;
+	float: right;
+	padding: 10px 18px;
+	background-color: #f44336;
+}
+
+.cancelBtn {
+	padding: 14px 20px;
+	background-color: #f44336;
+}
+
+.cancelBtn, .signupbtn {
+	width: 20%;
+}
+
+.imgMainContainer {
+	text-align: center;
+	margin: 24px 0 12px 0;
+}
+
+img.avatar {
+	width: 40%;
+	border-radius: 50%;
+}
+
+.mainContainer {
+	padding: 16px;
+}
+
+.containerReg {
+	padding: 16px;
+	text-align: center;
+	margin-top: 5%;
+}
+
+.modalReg {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-image: url("../images/flag.jpg");
+	background-size: cover;
+	padding-top: 50px;
+}
+
+.modalRegContent {
+	background-color: #fefefe;
+	margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+	border: 1px solid #888;
+	width: 30%; /* Could be more or less, depending on screen size */
+}
+
+hr {
+	border: 1px solid #f1f1f1;
+	margin-bottom: 25px;
+	width: 50%;
+}
+
+.closeReg {
+	position: absolute;
+	right: 35px;
+	top: 15px;
+	font-size: 40px;
+	font-weight: bold;
+	color: #f1f1f1;
+}
+
+.closeReg:hover,
+.closeReg:focus {
+	color: #f44336;
+	cursor: pointer;
+}
+
+.clearFixReg::after {
+	content: "";
+	clear: both;
+	display: table;
+}
+
+@media screen and (max-width: 700px)
+{
+	.mainForm {
+		width: 40%;
+	}
+
+	.signUpBtn {
+		height: 45px;
+	}
+
+	.forgotBtn {
+		width: 50%;
+	}
+
+	.cancelBtn, .signupbtn {
+		width: 100%;
+	}
+
+	.inputTextReg, .inputPassReg {
+		width: 100%;
+		padding: 15px;
+		margin: 5px 0 22px 0;
+		display: inline-block;
+		border: none;
+		background: #f1f1f1;
+	}
+}
+
+.Page_404 {
+	padding: 0;
+	margin: 0;
+	margin-top: 20%;
+	text-align: center;
+	font-size: 300%;
+	color: darkgray;
+}
