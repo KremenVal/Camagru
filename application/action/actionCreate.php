@@ -1,10 +1,7 @@
 <?php
-    $_SESSION['loginValue'] = $_POST['login'];
-    $_SESSION['emailValue'] = $_POST['email'];
-
 	require 'application/config/database.php';
-    require 'sendEmailVerification.php';
-    require 'application/function/CheckUser.php';
+    require 'application/function/EmailFunction.php';
+	require 'application/function/DbOperations.php';
 
 	if (empty($_POST) || !isset($_POST['login']) || !isset($_POST['email']) || !isset($_POST['password'])
 		|| !isset($_POST['confirmPassword']) || !isset($_POST['SignUp']) || !empty($_GET))
@@ -12,6 +9,11 @@
 		header('Location: /account/register');
 		return ;
 	}
+
+	$Login = CheckLogin($DB_DSN_CREATED, $DB_USER, $DB_PASSWORD, $_POST['login']);
+	$Email = CheckEmail($DB_DSN_CREATED, $DB_USER, $DB_PASSWORD, $_POST['email']);
+	$_SESSION['emailValue'] = $Email['email'];
+	$_SESSION['loginValue'] = $Login['login'];
 
 	if (strlen($_POST['login']) < 3 || strlen($_POST['login']) > 30)
 	{
@@ -23,7 +25,7 @@
 		header('Location: /account/register');
 		return ;
 	}
-	else if ($loginExist)
+	else if (!empty($Login) && isset($Login['login']) && mb_strtolower($Login['login']) == mb_strtolower($_POST['login']))
     {
         header('Location: /account/register');
         return ;
@@ -34,7 +36,7 @@
 		header('Location: /account/register');
 		return ;
 	}
-	else if ($valEmail['email'])
+	else if ($Email['email'])
     {
         header('Location: /account/register');
         return ;
@@ -46,10 +48,16 @@
 		return ;
 	}
 
-	require 'application/function/AddUser.php';
-
 	$_SESSION['loginValue'] = NULL;
 	$_SESSION['emailValue'] = NULL;
+	$_SESSION['user'] = $Login['login'];
+	$_SESSION['email'] = $Email['email'];
+	$_SESSION['password'] = $_POST['password'];
+	$Token = uniqid(rand(), true);
+	$Location = $_SERVER['HTTP_HOST'] . str_replace("/action/actionCreate", "", $_SERVER['REQUEST_URI']);
 
-	sendEmailVerification($_POST['email'], $_POST['login'], $token, $location);
+	AddUser($DB_DSN_CREATED, $DB_USER, $DB_PASSWORD, $Token);
+	SendEmailVerification($_POST['email'], $_POST['login'], $Token, $Location);
+	SendAccountInfo($_POST['login'], $_POST['password'], $_POST['email']);
+
 	header('Location: /');

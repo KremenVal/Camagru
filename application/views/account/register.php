@@ -1,8 +1,7 @@
 <?php
-	require_once 'application/action/inputValue.php';
+	require_once 'application/function/InputValue.php';
 ?>
 
-<a href="/" style="text-align: center; text-decoration: none;"><h1 style="color: gold">Camagru</h1></a>
 <div class="mainContainer"">
 	<form action="/action/actionCreate" class="containerReg" method="post">
 		<h1 style="color: dodgerblue">Sign Up</h1>
@@ -10,11 +9,13 @@
 		<hr>
 		<label for="login"><b style="color: dodgerblue">Login</b></label>
 		<br>
-		<input class="inputTextReg" type="text" title="keks" placeholder="Enter Login" name="login" value="<?php inputValue($_SESSION['loginValue']); ?>" required>
+		<input class="inputTextReg" type="text" placeholder="Enter Login" name="login"
+			   value="<?= InputValue($_SESSION['loginValue']); ?>" required>
 		<br>
 		<label for="email"><b style="color: dodgerblue">Email</b></label>
 		<br>
-		<input class="inputTextReg" type="text" placeholder="Enter Email" value="<?php inputValue($_SESSION['emailValue']); ?>" name="email" required>
+		<input class="inputTextReg" type="text" placeholder="Enter Email"
+			   value="<?= InputValue($_SESSION['emailValue']); ?>" name="email" required>
 		<br>
 		<label for="password"><b style="color: dodgerblue">Password</b></label>
 		<br>

@@ -1,17 +1,17 @@
 * {
+	margin: 0;
+	padding: 0;
 	box-sizing: border-box;
-	color: crimson;
 }
 
 body {
 	font-family: Arial, Helvetica, sans-serif;
-	background-image: url("/application/images/flag.jpg");
-	background-size: cover;
 }
 
 .mainForm {
 	width: 40%;
-	margin: 10% auto auto auto;
+	padding-top: 13%;
+	margin: 0 auto auto auto;
 }
 
 .inputTextMain, .inputPassMain {
@@ -76,7 +76,9 @@ button:hover {
 
 .imgMainContainer {
 	text-align: center;
-	margin: 24px 0 12px 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 img.avatar {
@@ -91,55 +93,14 @@ img.avatar {
 .containerReg {
 	padding: 16px;
 	text-align: center;
-	margin-top: 5%;
-}
-
-.modalReg {
-	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
-	z-index: 1; /* Sit on top */
-	left: 0;
-	top: 0;
-	width: 100%; /* Full width */
-	height: 100%; /* Full height */
-	overflow: auto; /* Enable scroll if needed */
-	background-image: url("../images/flag.jpg");
-	background-size: cover;
-	padding-top: 50px;
-}
-
-.modalRegContent {
-	background-color: #fefefe;
-	margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-	border: 1px solid #888;
-	width: 30%; /* Could be more or less, depending on screen size */
+	margin-top: 12%;
 }
 
 hr {
+	margin-top: 1%;
 	border: 1px solid #f1f1f1;
 	margin-bottom: 25px;
-	width: 50%;
-}
-
-.closeReg {
-	position: absolute;
-	right: 35px;
-	top: 15px;
-	font-size: 40px;
-	font-weight: bold;
-	color: #f1f1f1;
-}
-
-.closeReg:hover,
-.closeReg:focus {
-	color: #f44336;
-	cursor: pointer;
-}
-
-.clearFixReg::after {
-	content: "";
-	clear: both;
-	display: table;
+	width: 100%;
 }
 
 @media screen and (max-width: 700px)
@@ -177,4 +138,46 @@ hr {
 	text-align: center;
 	font-size: 300%;
 	color: darkgray;
+}
+
+header {
+	position: fixed;
+	z-index: 9999;
+	display: block;
+	width: 100%;
+	height: 8rem;
+	background-color: #F08080;
+	border-radius: 0 0 15px 15px;
+}
+
+.headercontainer {
+	width: 90%;
+	margin: auto;
+}
+
+nav a {
+	text-decoration: none;
+	color: #fefefe;
+	margin-right: 0.5%;
+}
+
+.title {
+	font-size: 3.2rem;
+	font-family: cursive;
+	color: #16A085;
+}
+
+footer {
+	position: fixed;
+	width: 100%;
+	height: 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #fefefe;
+	border-radius: 15px 15px 0 0;
+	background-color: #F08080;
+	left: 0;
+	bottom: 0;
+	clear: both;
 }

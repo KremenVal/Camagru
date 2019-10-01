@@ -1,6 +1,5 @@
 <?php
 	session_start();
-	require 'application/lib/Dev.php';
 
 	spl_autoload_register(function ($class) {
 		$path = str_replace('\\', '/', $class . '.php');
@@ -11,13 +10,17 @@
 		}
 	});
 
-	if (!isset($_SESSION['logged']))
+	if (!isset($_SESSION['logIn']) || !$_SESSION['logIn'])
 	{
+
+		$_SESSION['logIn'] = '';
+		$_SESSION['user'] = '';
+		$_SESSION['idUser'] = '';
+		$_SESSION['email'] = '';
+		$_SESSION['password'] = '';
+		$_SESSION['emailValue'] = '';
+		$_SESSION['loginValue'] = '';
 		require 'application/config/setup.php';
-	}
-	else
-	{
-		echo "string";
 	}
 
 	$router = new application\core\Router();

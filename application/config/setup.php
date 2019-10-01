@@ -26,7 +26,6 @@
 			`email` VARCHAR(255) NOT NULL,
 			`createsAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 			`password` VARCHAR(255) NOT NULL,
-			`passwordForUser` VARCHAR(255) NOT NULL,
 			`token` VARCHAR(255) NOT NULL,
 			`verification` VARCHAR(1) NOT NULL DEFAULT "N"
 		)';
@@ -57,4 +56,44 @@
 		echo "Error creating table 'image': " . $e->getMessage();
 		exit();
 	}
-?>
+
+	//Create table like
+	try
+	{
+		$pdo = new PDO($DB_DSN_CREATED, $DB_USER, $DB_PASSWORD);
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = 'CREATE TABLE IF NOT EXISTS `like` (
+				`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+				`imageId` INT(11) NOT NULL,
+				`isLiked` VARCHAR(255) NOT NULL,
+				`createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+				FOREIGN KEY (imageId) REFERENCES image(id)
+			)';
+		$pdo->exec($sql);
+	}
+	catch (PDOException $e)
+	{
+		echo "Error creating table 'like': " . $e->getMessage();
+		exit();
+	}
+
+	//Create table comment
+	try
+	{
+		$pdo = new PDO($DB_DSN_CREATED, $DB_USER, $DB_PASSWORD);
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = 'CREATE TABLE IF NOT EXISTS `comment` (
+					`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+					`imageId` INT(11) NOT NULL,
+					`comment` VARCHAR(255) NOT NULL,
+					`isLiked` VARCHAR(255) NOT NULL,
+					`createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+					FOREIGN KEY (imageId) REFERENCES `image`(id)
+				)';
+		$pdo->exec($sql);
+	}
+	catch (PDOException $e)
+	{
+		echo "Error creating table 'comment': " . $e->getMessage();
+		exit();
+	}

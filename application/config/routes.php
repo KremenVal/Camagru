@@ -40,5 +40,29 @@
 		'user/allPhotos' => [
 			'controller' => 'user',
 			'action' => 'allPhotos'
+		],
+		'action/addLike' => [
+			'controller' => 'action',
+			'action' => 'addLike'
+		],
+		'action/deleteLike' => [
+			'controller' => 'action',
+			'action' => 'deleteLike'
+		],
+		'action/logOut' => [
+			'controller' => 'action',
+			'action' => 'logOut'
+		],
+		'action/addComment' => [
+			'controller' => 'action',
+			'action' => 'addComment'
+		],
+		'action/getComment' => [
+			'controller' => 'action',
+			'action' => 'getComment'
+		],
+		'action/nextOrPreviousPage' => [
+			'controller' => 'action',
+			'action' => 'nextOrPreviousPage'
 		]
 	];

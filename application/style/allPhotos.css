@@ -1,8 +1,15 @@
+a {
+	text-decoration: none;
+}
+
+button {
+	width: auto;
+}
+
 .container {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	border: 1px solid black;
 }
 
 .picgallery {
@@ -22,4 +29,46 @@
 	width: 50%;
 	margin: 0.5% 0 0.5% 0;
 	border: 1px solid grey;
+}
+
+.infoPicture {
+	display: flex;
+	align-items: center;
+}
+
+.like, .comment {
+	outline:none;
+	border: none;
+	cursor: pointer;
+}
+
+.numberLike {
+	font-weight: bold;
+	font-family: Gill Sans, sans-serif;
+	margin-left: 5%;
+	bottom: 0;
+}
+
+.comment {
+	margin-left: 10%;
+}
+
+.inputcomment {
+	outline:none;
+	border: 1px solid #ccc;
+	margin-top: 0.5rem;
+	width: 100%;
+	height: 2.5rem;
+}
+
+.modalReg {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	padding-top: 50px;
 }
